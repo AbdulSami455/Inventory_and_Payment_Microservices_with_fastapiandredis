@@ -38,7 +38,31 @@ def root():
 # Applying middleware
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
 
+@app.get('/products')
+def all():
+    return [format(pk) for pk in Product.all_pks()]
+
+
+def format(pk: str):
+    product = Product.get(pk)
+
+    return {
+        'id': product.pk,
+        'name': product.name,
+        'price': product.price,
+        'quantity': product.quantity
+    }
+
 @app.post("/products")
 def addproducts(product: Product):
     return product.save()
 
+
+
+@app.get("/product/{pk}")
+def getproduct(pk:str):
+    return Product.get(pk)
+
+@app.delete("/product/{pk}")
+def deleteproduct(pk:str):
+    return Product.delete(pk)
