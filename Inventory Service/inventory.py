@@ -7,9 +7,9 @@ from pydantic import BaseModel
 # Replace 'your_redis_port' with the port number of your online Redis server
 # Replace 'your_redis_password' with the password for the online Redis server (if applicable)
 r = redis.StrictRedis(
-    host='redis-17646.c80.us-east-1-2.ec2.cloud.redislabs.com',
-    port=17646,
-    password='wVjCwUt2BR4aOzS0eAqr0HLAjk2wYcAV',
+    host='redis-12992.c239.us-east-1-2.ec2.cloud.redislabs.com',
+    port=12992,
+    password='SexaJKNvTACCea53G4aoY3ARyQe6c5bs',
     decode_responses=True
 )
 
@@ -36,3 +36,6 @@ def root():
 
 #applying middleware
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
+
+
+
