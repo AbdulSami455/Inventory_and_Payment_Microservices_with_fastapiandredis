@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from redis_om import get_redis_connection,HashModel
+from redis_om import get_redis_connection, HashModel
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from pydantic import BaseModel
 import redis
@@ -22,12 +22,12 @@ try:
 except redis.exceptions.ConnectionError as e:
     print("Failed to connect to Redis:", e)
 
-class Product(BaseModel):
+class Product(HashModel):
     name: str
     price: float
     quantity: int
     class Meta:
-        database=redis
+        database = r  # Use the Redis connection object 'r'
 
 app = FastAPI()
 
@@ -38,7 +38,7 @@ def root():
 # Applying middleware
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=["*"])
 
-
 @app.post("/products")
-def addproducts(product:Product):
+def addproducts(product: Product):
     return product.save()
+
