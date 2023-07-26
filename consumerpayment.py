@@ -1,4 +1,4 @@
-from payment import redis,Order
+from payment import redis, Order
 import time
 
 key = 'refund_order'
